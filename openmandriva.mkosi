@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
+[Distribution]
+# Distribution=openmandriva
+# Release=cooker
+
+[Output]
+ImageId=initrd
+Format=cpio
+ManifestFormat=
+Compress=gzip
+
+# This will create the cache and output directories if they aren't already in place
+Cache=mkosi.cache
+
+[Content]
+BasePackages=conditional
+Packages=
+        systemd
+        f2fs-tools
+        mksh
+        less
+
+RemovePackages=
+        shadow
+
+RemoveFiles=
+        # we don't need this after the binary catalogs have been built
+        /usr/lib/systemd/catalog
+        /etc/udev/hwdb.d
+        /usr/lib/udev/hwdb.d
